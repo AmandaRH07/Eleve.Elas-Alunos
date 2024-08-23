@@ -18,9 +18,11 @@ namespace Alunos.Data.Map
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
 
-			builder.HasMany(x => x.Alunos)
-				.WithOne(x => x.)
-				.IsRequired();
+			builder.Property(x => x.IdProfessor);
+
+			builder.HasOne(x => x.Professor)
+				.WithMany(x => x.Curso)
+				.HasForeignKey(x => x.IdProfessor);
 		}
 	}
 }

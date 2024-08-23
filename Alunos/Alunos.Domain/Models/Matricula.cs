@@ -10,8 +10,5 @@ namespace Alunos.Domain.Models
 
 		public int IdAluno { get; set; }
 		public int IdCurso { get; set; }
-
-		public Aluno Aluno { get; set; }
-		public Curso Curso { get; set; }
 	}
 }

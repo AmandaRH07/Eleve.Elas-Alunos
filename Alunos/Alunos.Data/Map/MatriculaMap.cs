@@ -17,9 +17,6 @@ namespace Alunos.Data.Map
 			builder.Property(x => x.StatusMatricula)
 				.IsRequired();
 
-			builder.Property(x => x.IdAluno);
-			builder.Property(x => x.IdCurso);
-
 			builder.HasIndex(x => new { x.IdAluno, x.IdCurso }).IsUnique();
 
 		}

@@ -21,6 +21,7 @@ namespace Alunos.Data.Map
 			builder.Property(x => x.Email)
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
+
 		}
 	}
 }

@@ -6,6 +6,7 @@
         public string Nome { get; set; }
         public string Endereco { get; set; }
         public string Email { get; set; }
-        public List<Curso> Curso { get; set; }
-    }
+		public List<AlunoCurso> AlunoCurso { get; set; }
+
+	}
 }

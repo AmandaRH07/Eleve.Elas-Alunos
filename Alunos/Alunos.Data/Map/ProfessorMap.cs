@@ -14,13 +14,10 @@ namespace Alunos.Data.Map
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
 
-			builder.Property(x => x.Endereco)
-				.HasColumnType("nvarchar(150)")
-				.IsRequired();
-
 			builder.Property(x => x.Email)
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
+
 		}
 	}
 }
