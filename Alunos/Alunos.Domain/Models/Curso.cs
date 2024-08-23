@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Alunos.Domain.Models
+﻿namespace Alunos.Domain.Models
 {
-	internal class Curso
+	public class Curso : IEntityBase
 	{
+		public int Id { get; set; }
+		public string Titulo { get; set; }
+		public string Descricao { get; set; }
+
+		public List<Aluno> Alunos { get; set; }
 	}
 }

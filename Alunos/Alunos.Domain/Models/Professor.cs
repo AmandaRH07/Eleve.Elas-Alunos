@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Alunos.Domain.Models
+﻿namespace Alunos.Domain.Models
 {
-	internal class Professor
+	public class Professor : IEntityBase
 	{
+		public int Id { get; set; }
+		public string Nome { get; set; }
+		public string Email { get; set; }
 	}
 }

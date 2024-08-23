@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alunos.Domain.Enums;
 
 namespace Alunos.Domain.Models
 {
-	internal class Matricula
+	public class Matricula
 	{
+		public int Id { get; set; }
+		public DateTime DataMatricula { get; set; }
+		public StatusMatricula StatusMatricula { get; set; }
+
+		public int IdAluno { get; set; }
+		public int IdCurso { get; set; }
+
+		public Aluno Aluno { get; set; }
+		public Curso Curso { get; set; }
 	}
 }
