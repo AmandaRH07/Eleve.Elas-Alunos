@@ -11,10 +11,15 @@ namespace Alunos.Data.Map
 			builder.HasKey(x => x.Id);
 
 			builder.Property(x => x.DataMatricula)
-				.HasColumnType("nvarchar(20)")
 				.IsRequired();
 
 			builder.Property(x => x.StatusMatricula)
+				.IsRequired();
+
+			builder.Property(x => x.IdAluno)
+				.IsRequired();
+
+			builder.Property(x => x.IdCurso)
 				.IsRequired();
 
 			builder.HasIndex(x => new { x.IdAluno, x.IdCurso }).IsUnique();

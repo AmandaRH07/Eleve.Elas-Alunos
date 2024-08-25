@@ -4,6 +4,7 @@ using Alunos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alunos.Data.Migrations
 {
     [DbContext(typeof(AlunosContexto))]
-    partial class AlunosContextoModelSnapshot : ModelSnapshot
+    [Migration("20240823230018_CriaTabelas")]
+    partial class CriaTabelas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +45,6 @@ namespace Alunos.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Aluno");
@@ -63,9 +63,6 @@ namespace Alunos.Data.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int?>("IdProfessor")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
@@ -87,8 +84,9 @@ namespace Alunos.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataMatricula")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DataMatricula")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("IdAluno")
                         .HasColumnType("int");

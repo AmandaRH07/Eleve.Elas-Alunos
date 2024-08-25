@@ -22,6 +22,9 @@ namespace Alunos.Data.Map
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
 
+			builder.Property(x => x.Status)
+				.IsRequired();
+
 		}
 	}
 }

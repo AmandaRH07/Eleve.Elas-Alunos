@@ -10,7 +10,7 @@ namespace Alunos.Data
         public DbSet<Professor> Professor { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Matricula> Matricula { get; set; }
-        public DbSet<AlunoCurso> AlunoCurso { get; set; }
+        //public DbSet<AlunoCurso> AlunoCurso { get; set; }
 
 		public AlunosContexto(DbContextOptions<AlunosContexto> options) : base(options)
         {
@@ -25,7 +25,10 @@ namespace Alunos.Data
 			modelBuilder.ApplyConfiguration(new CursoMap());
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.ApplyConfiguration(new AlunoCursoMap());
+			modelBuilder.ApplyConfiguration(new ProfessorMap());
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.ApplyConfiguration(new MatriculaMap());
 			base.OnModelCreating(modelBuilder);
 		}
 

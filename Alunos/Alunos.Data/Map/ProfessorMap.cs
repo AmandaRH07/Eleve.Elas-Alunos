@@ -18,6 +18,8 @@ namespace Alunos.Data.Map
 				.HasColumnType("nvarchar(150)")
 				.IsRequired();
 
+			
+
 		}
 	}
 }

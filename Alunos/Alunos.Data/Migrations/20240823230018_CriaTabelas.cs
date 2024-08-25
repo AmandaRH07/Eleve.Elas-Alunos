@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -32,7 +31,7 @@ namespace Alunos.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataMatricula = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     StatusMatricula = table.Column<int>(type: "int", nullable: false),
                     IdAluno = table.Column<int>(type: "int", nullable: false),
                     IdCurso = table.Column<int>(type: "int", nullable: false)
@@ -48,8 +47,8 @@ namespace Alunos.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(150)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(150)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,7 +63,7 @@ namespace Alunos.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titulo = table.Column<string>(type: "nvarchar(150)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(150)", nullable: false),
-                    IdProfessor = table.Column<int>(type: "int", nullable: false)
+                    IdProfessor = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,56 +72,32 @@ namespace Alunos.Data.Migrations
                         name: "FK_Curso_Professor_IdProfessor",
                         column: x => x.IdProfessor,
                         principalTable: "Professor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AlunoCurso",
-                columns: table => new
-                {
-                    IdAluno = table.Column<int>(type: "int", nullable: false),
-                    IdCurso = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AlunoCurso", x => new { x.IdAluno, x.IdCurso });
-                    table.ForeignKey(
-                        name: "FK_AlunoCurso_Aluno_IdAluno",
-                        column: x => x.IdAluno,
-                        principalTable: "Aluno",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AlunoCurso_Curso_IdAluno",
-                        column: x => x.IdAluno,
-                        principalTable: "Curso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Curso_IdProfessor",
                 table: "Curso",
                 column: "IdProfessor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matricula_IdAluno_IdCurso",
+                table: "Matricula",
+                columns: new[] { "IdAluno", "IdCurso" },
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AlunoCurso");
-
-            migrationBuilder.DropTable(
-                name: "Matricula");
-
-            migrationBuilder.DropTable(
                 name: "Aluno");
 
             migrationBuilder.DropTable(
                 name: "Curso");
+
+            migrationBuilder.DropTable(
+                name: "Matricula");
 
             migrationBuilder.DropTable(
                 name: "Professor");

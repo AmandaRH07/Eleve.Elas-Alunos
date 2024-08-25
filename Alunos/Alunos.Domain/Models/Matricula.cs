@@ -2,7 +2,7 @@
 
 namespace Alunos.Domain.Models
 {
-	public class Matricula
+	public class Matricula : IEntityBase
 	{
 		public int Id { get; set; }
 		public DateTime DataMatricula { get; set; }
@@ -10,5 +10,20 @@ namespace Alunos.Domain.Models
 
 		public int IdAluno { get; set; }
 		public int IdCurso { get; set; }
+
+		public Matricula(DateTime dataMatricula, StatusMatricula statusMatricula, int idAluno, int idCurso )
+		{
+			DataMatricula = dataMatricula;
+			StatusMatricula = statusMatricula;
+			IdAluno = idAluno;
+			IdCurso = idCurso;
+		}
+
+		public Matricula AlterarMatricula(StatusMatricula novoStatusMatricula)
+		{
+			StatusMatricula = novoStatusMatricula;
+
+			return this;
+		}
 	}
 }

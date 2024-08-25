@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Alunos.Data.Migrations
 {
     [DbContext(typeof(AlunosContexto))]
-    [Migration("20240823182530_CriaTabelas")]
-    partial class CriaTabelas
+    [Migration("20240823231504_MudaTipoMatricula")]
+    partial class MudaTipoMatricula
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,25 +50,6 @@ namespace Alunos.Data.Migrations
                     b.ToTable("Aluno");
                 });
 
-            modelBuilder.Entity("Alunos.Domain.Models.AlunoCurso", b =>
-                {
-                    b.Property<int>("IdAluno")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCurso")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("IdAluno", "IdCurso");
-
-                    b.ToTable("AlunoCurso");
-                });
-
             modelBuilder.Entity("Alunos.Domain.Models.Curso", b =>
                 {
                     b.Property<int>("Id")
@@ -81,7 +62,7 @@ namespace Alunos.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("IdProfessor")
+                    b.Property<int?>("IdProfessor")
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
@@ -117,6 +98,9 @@ namespace Alunos.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdAluno", "IdCurso")
+                        .IsUnique();
+
                     b.ToTable("Matricula");
                 });
 
@@ -130,55 +114,24 @@ namespace Alunos.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Professor");
                 });
 
-            modelBuilder.Entity("Alunos.Domain.Models.AlunoCurso", b =>
-                {
-                    b.HasOne("Alunos.Domain.Models.Aluno", "Aluno")
-                        .WithMany("AlunoCurso")
-                        .HasForeignKey("IdAluno")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Alunos.Domain.Models.Curso", "Curso")
-                        .WithMany("AlunoCurso")
-                        .HasForeignKey("IdAluno")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Curso");
-                });
-
             modelBuilder.Entity("Alunos.Domain.Models.Curso", b =>
                 {
                     b.HasOne("Alunos.Domain.Models.Professor", "Professor")
                         .WithMany("Curso")
-                        .HasForeignKey("IdProfessor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IdProfessor");
 
                     b.Navigation("Professor");
-                });
-
-            modelBuilder.Entity("Alunos.Domain.Models.Aluno", b =>
-                {
-                    b.Navigation("AlunoCurso");
-                });
-
-            modelBuilder.Entity("Alunos.Domain.Models.Curso", b =>
-                {
-                    b.Navigation("AlunoCurso");
                 });
 
             modelBuilder.Entity("Alunos.Domain.Models.Professor", b =>
